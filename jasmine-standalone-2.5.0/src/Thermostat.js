@@ -1,7 +1,7 @@
 function Thermostat() {
   this.temperature = 20;
   this._MINIMUM = 10;
-  this._MAX = null;
+  this._MAX = 25;
 }
 
 Thermostat.prototype = {
@@ -10,6 +10,9 @@ Thermostat.prototype = {
   },
 
   increaseTemperature: function() {
+    if(this.temperature >= this._MAX) {
+      throw new Error('cannot exceed max temperature');
+    }
     this.temperature += 1;
   },
 
@@ -27,5 +30,19 @@ Thermostat.prototype = {
   powerSaveOff: function() {
     this._MAX = 32;
   },
+
+  resetTemp: function() {
+    this.temperature = 20;
+  },
+
+  energyChecker: function() {
+    if(this.temperature < 18) {
+        return 'green';
+    } else if (this.temperature >= 18 && this.temperature < 25) {
+        return 'yellow';
+    } else {
+        return 'red';
+    }
+  }
 
 };

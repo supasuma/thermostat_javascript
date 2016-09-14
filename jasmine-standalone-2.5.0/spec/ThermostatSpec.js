@@ -37,4 +37,48 @@ beforeEach(function() {
     expect(thermostat._MAX).toEqual(32);
   });
 
+  it('resets temperature to 20', function() {
+    thermostat.resetTemp();
+    expect(thermostat.checkTemperature()).toEqual(20);
+  });
+
+  it('energy colour is green when temperature is less than 18', function() {
+    for(var i = 20; i >= 18; i--) {
+      thermostat.decreaseTemperature();
+    }
+    expect(thermostat.energyChecker()).toEqual('green');
+  });
+
+  it('energy colour is yellow when temperature is between 18 and 24', function() {
+    expect(thermostat.energyChecker()).toEqual('yellow');
+  });
+
+describe('powersave mode is on', function() {
+  beforeEach(function() {
+    thermostat.powerSaveOn();
+  });
+
+    it('cannot exceed max temperature', function() {
+      for(var i = 20; i < thermostat._MAX; i++) {
+        thermostat.increaseTemperature();
+      }
+      expect(function() { thermostat.increaseTemperature(); }).toThrowError('cannot exceed max temperature');
+    });
+
+});
+
+  describe('powersave mode is off', function() {
+    beforeEach(function() {
+      thermostat.powerSaveOff();
+    });
+
+    it('energy colour is red when temperature is 25 or more', function() {
+      for(var i = 20; i < 25; i++) {
+        thermostat.increaseTemperature();
+      }
+      expect(thermostat.energyChecker()).toEqual('red');
+    });
+
+  });
+
 });
