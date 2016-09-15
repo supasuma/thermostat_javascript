@@ -1,0 +1,47 @@
+#container {
+  padding: 10px;
+  margin: 150px;
+  border: solid 2px;
+  position: absolute;
+  width: 60%;
+}
+
+#left {
+  float: left;
+  border: solid 2px;
+  height: 200px;
+  padding: 10px 20px 20px 10px;
+
+}
+
+#right {
+    border: solid 2px;
+    float: right;
+    height: 200px;
+    padding: 10px 20px 20px 10px;
+}
+
+#temperature {
+  font-size: 500%;
+  text-align: center;
+  margin: 20px;
+}
+
+
+#current-temp {
+  font-size: 500%;
+  text-align: center;
+  margin: 20px;
+}
+
+#temp-control {
+
+}
+
+#psm-control {
+
+}
+
+.active {
+  background-color: green;
+}

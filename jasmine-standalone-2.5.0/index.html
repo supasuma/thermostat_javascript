@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="public/thermostat.css">
     <meta charset="utf-8">
     <title>Thermostat</title>
   </head>
   <body>
-    <section>
-      <h1 id='temperature'></h1>
-      <p>
-        <button id="temperature-up">+</button>
-        <button id="temperature-down">-</button>
-        <button id="reset">reset</button>
-        power saving mode is <span id="energy-use-colour">on</span>
-        <button id="power-save-on">PSM on</button>
-        <p id="power-save-message"></p>
-        <button id="power-save-off">PSM off</button>
-      </p>
-    </section>
+    <main id="container">
+      <section id="top">
+        <h1>Our AMAAAAZING Thermostat</h1>
+      </section>
+
+      <section id="left">
+        <p id="current-temp"></p>
+        <p>in london today</p>
+        <form id="enter-city" action="index.html">
+          <input type="text" name="city" value="city">
+          <input type="submit" name="submit" value="find my city">
+        </form>
+      </section>
+
+      <section id="right">
+        <p id='temperature'></p>
+
+          <section id='temp-control'>
+            <button id="temperature-up">+</button>
+            <button id="temperature-down">-</button>
+            <button id="reset">reset</button>
+          </section>
+
+          <section id='psm-control'>
+            <button class='active' id="power-save-on">PSM on</button>
+            <button id="power-save-off">PSM off</button>
+            <p id="power-save-message"></p>
+          </section>
+
+      </section>
+
+
+
+
+    </main>
 
     <script src="src/Thermostat.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
