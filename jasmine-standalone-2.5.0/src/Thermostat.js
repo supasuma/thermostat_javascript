@@ -1,7 +1,8 @@
 function Thermostat() {
   this.temperature = 20;
   this._MINIMUM = 10;
-  this._MAX = 25;
+  this.maxTemp = 25;
+  this.powerSaveMode = true;
 }
 
 Thermostat.prototype = {
@@ -10,7 +11,7 @@ Thermostat.prototype = {
   },
 
   increaseTemperature: function() {
-    if(this.temperature >= this._MAX) {
+    if(this.temperature >= this.maxTemp) {
       throw new Error('cannot exceed max temperature');
     }
     this.temperature += 1;
@@ -24,11 +25,21 @@ Thermostat.prototype = {
   },
 
   powerSaveOn: function() {
-    this._MAX = 25;
+    this.maxTemp = 25;
+    this.powerSaveMode = true;
   },
 
   powerSaveOff: function() {
-    this._MAX = 32;
+    this.maxTemp = 32;
+    this.powerSaveMode = false;
+  },
+
+  isPowerSaveOn: function() {
+    if(this.powerSaveMode === true) {
+      return 'power save mode is on';
+    } else {
+      return 'power save mode is off';
+    }
   },
 
   resetTemp: function() {

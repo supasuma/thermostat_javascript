@@ -29,12 +29,12 @@ beforeEach(function() {
 
   it('in powersave mode sets max temperature to 25', function(){
     thermostat.powerSaveOn();
-    expect(thermostat._MAX).toEqual(25);
+    expect(thermostat.maxTemp).toEqual(25);
   });
 
   it('when power save mode is off max temperature is 32', function(){
     thermostat.powerSaveOff();
-    expect(thermostat._MAX).toEqual(32);
+    expect(thermostat.maxTemp).toEqual(32);
   });
 
   it('resets temperature to 20', function() {
@@ -59,10 +59,14 @@ describe('powersave mode is on', function() {
   });
 
     it('cannot exceed max temperature', function() {
-      for(var i = 20; i < thermostat._MAX; i++) {
+      for(var i = 20; i < thermostat.maxTemp; i++) {
         thermostat.increaseTemperature();
       }
       expect(function() { thermostat.increaseTemperature(); }).toThrowError('cannot exceed max temperature');
+    });
+
+    it('will be set to true', function() {
+      expect(thermostat.isPowerSaveOn()).toEqual('power save mode is on');
     });
 
 });
@@ -77,6 +81,10 @@ describe('powersave mode is on', function() {
         thermostat.increaseTemperature();
       }
       expect(thermostat.energyChecker()).toEqual('red');
+    });
+
+    it('power save mode will be set to false', function() {
+      expect(thermostat.isPowerSaveOn()).toEqual('power save mode is off');
     });
 
   });

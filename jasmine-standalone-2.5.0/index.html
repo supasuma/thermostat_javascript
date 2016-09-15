@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Thermostat</title>
+  </head>
+  <body>
+    <section>
+      <h1 id='temperature'></h1>
+      <p>
+        <button id="temperature-up">+</button>
+        <button id="temperature-down">-</button>
+        <button id="reset">reset</button>
+        power saving mode is <span id="energy-use-colour">on</span>
+        <button id="power-save-on">PSM on</button>
+        <button id="power-save-off">PSM off</button>
+      </p>
+    </section>
+
+    <script src="js/Thermostat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $("#energy-use-color").text('on').css({color:'red', fontWeight:'bold'});
+        $("#reset").css({color:'red', fontWeight:'bold'});
+        $("#temperature-up").hide(1000).delay(1000).show(1000)
+        $("#temperature-down").fadeToggle(1000).delay(1000).fadeToggle(1000)
+
+      });
+
+    </script>
+
+  </body>
+</html>
