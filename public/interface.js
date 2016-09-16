@@ -1,21 +1,42 @@
 $(document).ready(function() {
+  var thermostat = new Thermostat();
+  loadWeather();
 
 
-   var thermostat = new Thermostat();
 
-    $("#temperature").text(thermostat.temperature);
 
-    $("").css({backgroundColor:thermostat.energyChecker()});
+
+   function saveWeather() {
+     $.post("http://localhost:9292/temperature", {temperature: thermostat.checkTemperature(), mode: thermostat.isPowerSaveOn()});
+   }
+
+   function loadWeather() {
+     $.get("http://localhost:9292/temperature", function(data) {
+       var dataParse = JSON.parse(data);
+       thermostat.temperature = dataParse.temperature;
+       thermostat.powerSaveMode = dataParse.mode;
+      $("#temperature").text(thermostat.temperature);
+        $("#right").css({backgroundColor:thermostat.energyChecker()});
+     });
+   }
+
+
+
+
+    // $("").css({backgroundColor:thermostat.energyChecker()});
 
     $("#temperature-up").click(function() {
         thermostat.increaseTemperature();
         $("#temperature").text(thermostat.temperature);
-        $("body").css({backgroundColor:thermostat.energyChecker()});
+        $("#right").css({backgroundColor:thermostat.energyChecker()});
+        saveWeather();
     });
     $("#temperature-down").click(function() {
         thermostat.decreaseTemperature();
         $("#temperature").text(thermostat.temperature);
-        $("body").css({backgroundColor:thermostat.energyChecker()});
+        $("#right").css({backgroundColor:thermostat.energyChecker()});
+        saveWeather();
+
     });
 
     $("#reset").click(function() {
@@ -29,6 +50,8 @@ $(document).ready(function() {
       $(this).toggleClass("active");
       $('#power-save-off').toggleClass("active");
       $('#power-save-message').text(thermostat.isPowerSaveOn());
+      saveWeather();
+
     });
 
     $("#power-save-off").click(function() {
@@ -36,6 +59,8 @@ $(document).ready(function() {
       $('#power-save-on').toggleClass("active");
       $(this).toggleClass("active");
       $('#power-save-message').text(thermostat.isPowerSaveOn());
+      saveWeather();
+
     });
 
     $("#enter-city").submit(function(event) {

@@ -35,11 +35,7 @@ Thermostat.prototype = {
   },
 
   isPowerSaveOn: function() {
-    if(this.powerSaveMode === true) {
-      return 'power save mode is on';
-    } else {
-      return 'power save mode is off';
-    }
+    return this.powerSaveMode;
   },
 
   resetTemp: function() {
